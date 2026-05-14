@@ -1,0 +1,8 @@
+# Files 
+*settings.mat
+
+# System/Temp files
+Thumbs.db 
+*.tmp 
+~$*
+*.log
