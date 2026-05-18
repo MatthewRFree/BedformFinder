@@ -13,4 +13,5 @@ function plotBedElevationProfile(D,index)
         xlim([nanmean(S)-offset, nanmean(S)+offset])
         grid on   
         box on;
+        set(findall(gcf,'-property','FontName'),'FontSize',20);
 end

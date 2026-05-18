@@ -38,8 +38,8 @@ function heatMap(Eastings, Northings, Color, gridspacing, xBoundary, yBoundary)
     hImg = findobj(gca, 'Type', 'Image');
     set(hImg, 'AlphaData', ~isnan(interpolatedC));
     clim([prctile(Color, 2.5), prctile(Color, 97.5)])
-    xlabel('Eastings (m)');
-    ylabel('Northings (m)');
+    xlabel('Easting (m)');
+    ylabel('Northing (m)');
     
     if (~(isempty(xBoundary) || isempty(yBoundary)))
         boundaryIndex = boundary(xBoundary, yBoundary, 0.5);

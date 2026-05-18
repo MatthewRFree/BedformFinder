@@ -6,6 +6,9 @@ function plotBedformHeightHeatmap(D)
         heatMap(cell2mat(D.ProfileEastingPeak(:)),cell2mat(D.ProfileNorthingPeak(:)),D.H,500, X, Y);
         grid
         c = colorbar;
-        c.Label.String = 'Height';
+        c.Label.String = 'Bedform Height, H (m)';
         colormap("turbo")
+        xlim([min(X), max(X)])
+        ylim([min(Y), max(Y)])
+        set(findall(gcf,'-property','FontName'),'FontSize',20);
 end

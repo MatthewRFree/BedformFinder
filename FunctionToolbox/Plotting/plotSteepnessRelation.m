@@ -15,4 +15,5 @@ function plotSteepnessRelation(D)
         set(gca, 'XScale', 'log')    
         grid
         box on;
+        set(findall(gcf,'-property','FontName'),'FontSize',20);
 end

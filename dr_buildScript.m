@@ -8,11 +8,12 @@ close all
 
 % Create a unique name for each build
     number = 1;
-    testDir = fullfile(projectRoot, "StandaloneWindowsApplication", "output");
+    testDir = fullfile(projectRoot, "StandaloneWindowsApplication", "output" + string(number));
     while true
         if ~isfolder(testDir)
             break;
         end
+        number = number + 1;
         testDir = fullfile(projectRoot, "StandaloneWindowsApplication", "output" + string(number));
     end
 

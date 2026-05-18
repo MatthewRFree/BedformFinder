@@ -26,4 +26,5 @@ function plotHeightvsLength(D)
         xlim(xl .* [10^(-offset), 10^(offset)])
         grid on
         box on
+        set(findall(gcf,'-property','FontName'),'FontSize',20);
 end

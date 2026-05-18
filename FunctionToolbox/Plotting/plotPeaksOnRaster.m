@@ -52,8 +52,8 @@ function plotPeaksOnRaster(D, ax)
     scatter(ax, duneEastingPeaks, duneNorthingPeaks, ...
         8*dotScale, [0.15 0.5 0.05], 'filled', 'MarkerFaceAlpha', 0.9);
 
-    xlabel(ax, 'Easting');
-    ylabel(ax, 'Northing');
+    xlabel(ax, 'Easting (m)');
+    ylabel(ax, 'Northing (m)');
 
     daspect(ax, [1 1 1]);
 
@@ -64,7 +64,17 @@ function plotPeaksOnRaster(D, ax)
 
     colormap(ax, getColor("rwb"));
     clim(ax, [-0.5*cstd 0.5*cstd]);
+    
+    if nargin >= 2 && ~isempty(ax)
+        textColor = ax.XColor;
+        c.Color = textColor;
+        c.Label.Color = textColor;
+    end
 
+    xlim(ax, [min(X), max(X)])
+    ylim(ax, [min(Y), max(Y)])
+
+    set(findall(ax,'-property','FontName'),'FontSize',20);
 end
 
 function color = getColor(s)

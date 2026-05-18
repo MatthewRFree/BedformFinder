@@ -14,4 +14,5 @@ function plotDatevsReachLoc(D,units)
         ylabel(units)
         grid on
         box on
+        set(findall(gcf,'-property','FontName'),'FontSize',20);
 end
