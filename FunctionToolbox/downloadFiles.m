@@ -174,48 +174,44 @@ end
 function [X,Y,Z] = readXYZFromStream(app, zipStream)
     updateeHydroText(app,"&nbsp;&nbsp;&nbsp;&nbsp;Reading file.");
 
-    reader = java.io.BufferedReader( ...
-        java.io.InputStreamReader(zipStream,'UTF-8'));
+    scanner = java.util.Scanner(zipStream, 'UTF-8');
+    scanner.useDelimiter('\Z');
+    txt = char(scanner.next());
+    scanner.close();
+    
+    if ~waitIfPaused(app)
+        return
+    end
+    
+    lines = strsplit(txt, newline);
 
-    block = 100000;
-
+    block = 1e6;
     X = zeros(block,1);
     Y = zeros(block,1);
     Z = zeros(block,1);
-
     k = 0;
-    line = reader.readLine();
-
-    while ~isempty(line)
-
-        if mod(k,1000)==0
+    
+    for i = 1:numel(lines)
+        if mod(i,10000) == 0
             if ~waitIfPaused(app)
-                reader.close();
                 return
             end
         end
-
-        nums = sscanf(char(line),'%f %f %f');
-
-        if numel(nums)==3
+    
+        nums = sscanf(lines{i}, '%f %f %f');
+        if numel(nums) == 3
             k = k + 1;
-
             if k > numel(X)
                 X(end+block) = 0;
                 Y(end+block) = 0;
                 Z(end+block) = 0;
             end
-
             X(k) = nums(1);
             Y(k) = nums(2);
             Z(k) = nums(3);
         end
-
-        line = reader.readLine();
     end
-
-    reader.close();
-
+    
     X = X(1:k);
     Y = Y(1:k);
     Z = Z(1:k);
